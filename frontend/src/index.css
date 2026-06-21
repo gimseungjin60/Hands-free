@@ -1,0 +1,23 @@
+:root {
+  /* SubtitleBar 가 참조하는 디자인 토큰 (다크 테마) */
+  --color-bg: #1b1d22;
+  --color-primary: #4fd1c5;
+  --color-text-primary: #f4f6fb;
+  --color-text-secondary: #c7cdd8;
+  --color-text-tertiary: #8b93a3;
+  --color-text-disabled: #555c6a;
+  --radius-sm: 14px;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  font-family: 'Pretendard', system-ui, -apple-system, sans-serif;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+html, body, #root { height: 100%; margin: 0; }
+
+body {
+  background: #0f1115;
+  color: var(--color-text-primary);
+}

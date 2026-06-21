@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# secrets
+backend/.env
+*.key
+
+# TTS 임시/생성물
+backend/sounds/temp_voice_*.mp3
+
+# Node / Vite
+node_modules/
+frontend/dist/
+backend/dist/
+*.log
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/

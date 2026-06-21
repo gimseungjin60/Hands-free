@@ -1,0 +1,150 @@
+/* === 음성 패널 컨테이너 === (senior-smile-project SubtitleBar.css 재사용) */
+.voice-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  transition: opacity 0.4s;
+  min-height: 120px;
+  padding: 1.5rem;
+  gap: 1.2rem;
+}
+
+.voice-panel--has-content { padding: 2rem; }
+.voice-panel--idle { opacity: 0.5; }
+.voice-panel--active { opacity: 1; }
+
+/* === 사용자 텍스트 === */
+.vp-user-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  width: 100%;
+  background: var(--color-bg);
+  padding: 0.8rem 1rem;
+  border-radius: var(--radius-sm);
+  animation: vpFadeIn 0.4s var(--ease-out-expo);
+}
+
+.vp-user-text--alone { margin-bottom: 0; }
+
+.vp-user-text-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  letter-spacing: 0.02em;
+}
+
+.vp-user-text-content {
+  font-size: 1.15rem;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+/* === 조교 답변 === */
+.vp-speech { width: 100%; animation: vpFadeIn 0.3s var(--ease-out-expo); }
+
+.vp-speaker {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.8rem;
+}
+
+.vp-speaker-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  animation: speakPulse 1.4s ease-in-out infinite;
+}
+
+@keyframes speakPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.65); }
+}
+
+.vp-speaker-label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.vp-text {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  line-height: 1.6;
+  word-break: keep-all;
+}
+
+/* === 듣는 중 === */
+.vp-listening {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.vp-listening-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text-tertiary);
+}
+
+.vp-dots { display: flex; gap: 0.5rem; align-items: center; }
+
+.vp-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--color-text-disabled);
+  animation: listenBounce 1.2s ease-in-out infinite;
+}
+
+.vp-dot:nth-child(2) { animation-delay: 0.15s; }
+.vp-dot:nth-child(3) { animation-delay: 0.30s; }
+
+@keyframes listenBounce {
+  0%, 60%, 100% { transform: translateY(0); background: var(--color-text-disabled); }
+  30% { transform: translateY(-8px); background: var(--color-primary); }
+}
+
+/* === 대기 중 === */
+.vp-idle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.vp-idle-icon { font-size: 2rem; opacity: 0.35; }
+
+.vp-idle-text {
+  font-size: 1.2rem;
+  color: var(--color-text-tertiary);
+  font-weight: 500;
+}
+
+.vp-idle--listening .vp-idle-icon {
+  opacity: 1;
+  animation: micPulse 1.2s ease-in-out infinite;
+}
+
+.vp-idle--listening .vp-idle-text {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+@keyframes micPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.18); opacity: 0.55; }
+}
+
+@keyframes vpFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
