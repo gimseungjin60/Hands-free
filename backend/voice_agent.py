@@ -295,7 +295,7 @@ class VoiceAgent:
                 model=config.TTS_MODEL,
                 voice=config.TTS_VOICE,
                 input=text,
-                speed=1.05,
+                speed=config.TTS_SPEED,
             )
             resp.stream_to_file(self.temp_voice_path)
             self._play_and_wait(

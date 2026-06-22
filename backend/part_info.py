@@ -84,6 +84,7 @@ def board_context() -> str:
     color = r.get("color_to_digit", {})
     mult = r.get("multiplier_band", {})
     refs = ", ".join(board.get("parts", {}).keys())
+    envs = board.get("envelopes", {})
 
     lines = [
         f"[보드] {board.get('board')} (MCU {board.get('mcu')})",
@@ -99,5 +100,7 @@ def board_context() -> str:
         f"  · 어레이저항: {warns.get('array_resistor')}",
         f"  · 트랜지스터: {warns.get('transistor')}",
         f"[조회 가능한 레퍼런스] {refs}",
+        "[봉투(조립 순서) — '다음 봉투'·'N번 봉투' 질문에 직접 답하라]",
+        *[f"  · 봉투 {k}: {v}" for k, v in sorted(envs.items())],
     ]
     return "\n".join(lines)
