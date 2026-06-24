@@ -105,14 +105,17 @@ async def ws_state(websocket: WebSocket, device_id: str):
     try:
         while True:
             ag = dev.agent
+            part = ag.current_part
             state = {
                 "type": "state",
                 "subtitle": ag.current_subtitle or "",
                 "user": ag.current_user_text or "",
                 "listening": ag.is_listening,
                 "speaking": ag.is_speaking,
+                "part": part,
             }
-            key = (state["subtitle"], state["user"], state["listening"], state["speaking"])
+            pkey = f"{(part or {}).get('reference', '')}|{(part or {}).get('value', '')}"
+            key = (state["subtitle"], state["user"], state["listening"], state["speaking"], pkey)
             if key != last:
                 last = key
                 await websocket.send_json(state)

@@ -1,0 +1,55 @@
+/* 상단 상태 배지 (v0 재현 — 다크테마, teal 강조, 듣는중 pulse) */
+.status-badge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  border: 1px solid;
+  border-radius: 999px;
+  padding: 0.7rem 1.6rem;
+  font-size: clamp(1.1rem, 2vw, 1.6rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  transition: color 0.3s, background 0.3s, border-color 0.3s;
+}
+
+.status-badge__icon { font-size: 1.1em; line-height: 1; }
+
+/* 듣는중 — teal 강조 + ping */
+.sb--listening {
+  color: #5eead4;
+  background: rgba(45, 212, 191, 0.14);
+  border-color: rgba(45, 212, 191, 0.45);
+}
+.status-badge__ping {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  border: 1px solid rgba(45, 212, 191, 0.5);
+  animation: sbPing 1.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+@keyframes sbPing {
+  0%   { transform: scale(1);    opacity: 0.7; }
+  75%, 100% { transform: scale(1.12); opacity: 0; }
+}
+
+/* 생각중 — amber */
+.sb--thinking {
+  color: #fcd34d;
+  background: rgba(245, 158, 11, 0.14);
+  border-color: rgba(245, 158, 11, 0.4);
+}
+
+/* 답하는중 — blue */
+.sb--speaking {
+  color: #93c5fd;
+  background: rgba(59, 130, 246, 0.14);
+  border-color: rgba(59, 130, 246, 0.4);
+}
+
+/* 대기중 — slate */
+.sb--idle {
+  color: var(--color-text-secondary);
+  background: #20242c;
+  border-color: #2c313b;
+}

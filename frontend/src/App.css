@@ -1,46 +1,49 @@
+/* v0 시연 UI 재현 — 전체화면 다크, 카메라용 큰 스케일 */
 .app {
   display: flex;
   flex-direction: column;
-  min-height: 100%;
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 1.5rem;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
 }
 
 .app-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid #262a32;
+  flex-shrink: 0;
+  gap: 1rem;
+  padding: 1.4rem clamp(1.5rem, 4vw, 3.5rem);
+  border-bottom: 1px solid #20242c;
 }
 
 .app-title {
-  font-size: 1.3rem;
-  font-weight: 800;
-  margin: 0;
-  letter-spacing: -0.01em;
-}
-
-.app-status {
-  font-size: 0.85rem;
+  font-size: clamp(1.1rem, 2.2vw, 1.6rem);
   font-weight: 700;
-  padding: 0.25rem 0.7rem;
-  border-radius: 999px;
+  letter-spacing: -0.01em;
+  margin: 0;
+  color: var(--color-text-secondary);
 }
-.app-status.ok { color: #0f1115; background: var(--color-primary); }
-.app-status.off { color: var(--color-text-tertiary); background: #20242c; }
 
 .app-main {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: clamp(1.5rem, 4vw, 4rem);
+  min-height: 0;
 }
 
 .app-footer {
-  text-align: center;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1.5rem clamp(1.5rem, 4vw, 3rem);
+  min-height: 3rem;
+}
+
+.app-hint {
   color: var(--color-text-tertiary);
-  font-size: 0.9rem;
-  padding-top: 1rem;
+  font-size: clamp(0.9rem, 1.6vw, 1.1rem);
 }

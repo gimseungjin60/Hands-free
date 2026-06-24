@@ -34,6 +34,38 @@ def _norm(ref: str) -> str:
     return re.sub(r"[^A-Z0-9]", "", (ref or "").upper())
 
 
+_confusable = None
+
+
+def _ref_split(key: str):
+    """정규화된 키를 (영문 접두, 숫자문자열)로 분리. 예: 'R13' → ('R','13')."""
+    m = re.match(r"^([A-Z]+)(\d+)$", key)
+    return (m.group(1), m.group(2)) if m else (None, None)
+
+
+def confusable_refs() -> set:
+    """STT 숫자 오인식으로 *유효하지만 다른* 레퍼런스가 될 위험이 있는 부품 집합.
+    같은 접두 안에서 숫자문자열이 서로 포함관계면 헷갈림(R3⊂R13, C2⊂C21, R5⊂R15).
+    이런 부품은 답할 때 번호를 복창해 학생이 오인식을 잡게 한다."""
+    global _confusable
+    if _confusable is None:
+        keys = [_norm(k) for k in get_board().get("parts", {}).keys()]
+        conf = set()
+        for a in keys:
+            pa, na = _ref_split(a)
+            if pa is None:
+                continue
+            for b in keys:
+                if a == b:
+                    continue
+                pb, nb = _ref_split(b)
+                if pb == pa and (na in nb or nb in na):
+                    conf.add(a)
+                    break
+        _confusable = conf
+    return _confusable
+
+
 def get_part_info(reference: str) -> dict:
     """부품 레퍼런스(예: R5, D1, C2, U4, AR1, TR5)로 정확한 값·극성·색띠·위치·조립순서 조회.
     값/극성/위치를 답하기 전 반드시 호출. 못 찾으면 found=False — 절대 추측하지 말 것."""
@@ -58,6 +90,15 @@ def get_part_info(reference: str) -> dict:
 
     result = {"found": True, "reference": key}
     result.update(part)
+
+    if _norm(key) in confusable_refs():
+        result["confusable"] = True
+        result["confusable_note"] = (
+            "비슷한 번호의 부품이 있어 STT가 잘못 들었을 수 있음 — "
+            "답 첫머리에 레퍼런스 번호를 또박또박 복창해 학생이 확인하게 할 것."
+        )
+    else:
+        result["confusable"] = False
 
     meta = board.get("meta", {})
     if part.get("type") == "resistor":

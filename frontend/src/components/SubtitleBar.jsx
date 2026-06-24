@@ -40,7 +40,7 @@ function SubtitleBar({ subtitle, userText, isListening, micOpen }) {
     <div className={`voice-panel ${isEmpty ? 'voice-panel--idle' : 'voice-panel--active'} ${hasContent ? 'voice-panel--has-content' : ''}`}>
       {userText && (
         <div className={`vp-user-text ${(displayText || isProcessing) ? '' : 'vp-user-text--alone'}`}>
-          <span className="vp-user-text-label">내 질문</span>
+          <span className="vp-user-text-label">🗣 학생</span>
           <span className="vp-user-text-content">{userText}</span>
         </div>
       )}
@@ -58,7 +58,7 @@ function SubtitleBar({ subtitle, userText, isListening, micOpen }) {
         <div className="vp-speech">
           <div className="vp-speaker">
             <span className="vp-speaker-dot" />
-            <span className="vp-speaker-label">조교</span>
+            <span className="vp-speaker-label">🔊 조교</span>
           </div>
           <p className="vp-text">{displayText}</p>
         </div>

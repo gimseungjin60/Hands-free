@@ -1,60 +1,62 @@
-/* === 음성 패널 컨테이너 === (senior-smile-project SubtitleBar.css 재사용) */
+/* === 음성 패널 컨테이너 === (v0 재현 — 카메라용 큰 자막) */
 .voice-panel {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
   border-radius: var(--radius-sm);
   transition: opacity 0.4s;
-  min-height: 120px;
+  min-height: 160px;
   padding: 1.5rem;
-  gap: 1.2rem;
+  gap: clamp(1.2rem, 3vh, 2.4rem);
 }
 
 .voice-panel--has-content { padding: 2rem; }
 .voice-panel--idle { opacity: 0.5; }
 .voice-panel--active { opacity: 1; }
 
-/* === 사용자 텍스트 === */
+/* === 학생 질문(작게/회색) === */
 .vp-user-text {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.5rem;
   width: 100%;
-  background: var(--color-bg);
-  padding: 0.8rem 1rem;
-  border-radius: var(--radius-sm);
   animation: vpFadeIn 0.4s var(--ease-out-expo);
 }
 
 .vp-user-text--alone { margin-bottom: 0; }
 
 .vp-user-text-label {
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   font-weight: 700;
-  color: var(--color-primary);
+  color: var(--color-text-tertiary);
   letter-spacing: 0.02em;
 }
 
 .vp-user-text-content {
-  font-size: 1.15rem;
+  font-size: clamp(1.4rem, 2.6vw, 2rem);
+  font-weight: 500;
   color: var(--color-text-secondary);
-  line-height: 1.5;
+  line-height: 1.45;
+  word-break: keep-all;
 }
 
-/* === 조교 답변 === */
+/* === 조교 답변(크게/teal 강조) === */
 .vp-speech { width: 100%; animation: vpFadeIn 0.3s var(--ease-out-expo); }
 
 .vp-speaker {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  margin-bottom: 0.8rem;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .vp-speaker-dot {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background: var(--color-primary);
   animation: speakPulse 1.4s ease-in-out infinite;
@@ -66,16 +68,17 @@
 }
 
 .vp-speaker-label {
-  font-size: 0.9rem;
-  font-weight: 700;
+  font-size: 1.05rem;
+  font-weight: 800;
   color: var(--color-primary);
 }
 
 .vp-text {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: var(--color-text-primary);
-  line-height: 1.6;
+  font-size: clamp(2.2rem, 4.6vw, 3.4rem);
+  font-weight: 800;
+  color: #5eead4;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
   word-break: keep-all;
 }
 
@@ -89,16 +92,16 @@
 }
 
 .vp-listening-label {
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 600;
   color: var(--color-text-tertiary);
 }
 
-.vp-dots { display: flex; gap: 0.5rem; align-items: center; }
+.vp-dots { display: flex; gap: 0.55rem; align-items: center; }
 
 .vp-dot {
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
   background: var(--color-text-disabled);
   animation: listenBounce 1.2s ease-in-out infinite;
@@ -117,14 +120,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.6rem;
   width: 100%;
 }
 
-.vp-idle-icon { font-size: 2rem; opacity: 0.35; }
+.vp-idle-icon { font-size: 2.6rem; opacity: 0.35; }
 
 .vp-idle-text {
-  font-size: 1.2rem;
+  font-size: clamp(1.2rem, 2.2vw, 1.6rem);
   color: var(--color-text-tertiary);
   font-weight: 500;
 }
